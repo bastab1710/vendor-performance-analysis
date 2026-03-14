@@ -100,6 +100,6 @@ python EDAFiles/get_vendor_summary.py
 
 ## Contributors
 
-- Uddipan Roy
-- Nikita Das
 - Bastabika Das
+- Nikita Das
+- Uddipan Roy
