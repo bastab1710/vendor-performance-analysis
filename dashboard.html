@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Performance Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="header-icon">📊</div>
+            <h1>Vendor Performance Analysis Dashboard</h1>
+        </div>
+        <button id="logout-button" class="button">Logout</button>
+    </header>
+
+    <main class="dashboard-grid">
+
+        <div class="card" data-modal-target="modal-dist">
+            <div class="card-tag">EDA</div>
+            <h3>Distribution of Numerical Data</h3>
+            <p>Histograms showing the frequency distribution of key numerical columns.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-box">
+            <div class="card-tag">Outliers</div>
+            <h3>Outlier Detection</h3>
+            <p>Boxplots to identify potential outliers in the dataset for various metrics.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-cat">
+            <div class="card-tag">Categorical</div>
+            <h3>Categorical Data Counts</h3>
+            <p>Count plots for top vendors and product descriptions.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-corr">
+            <div class="card-tag">Correlation</div>
+            <h3>Correlation Heatmap</h3>
+            <p>Visualizing the correlation between numerical variables.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-promo">
+            <div class="card-tag">Strategy</div>
+            <h3>Brand Promotional Strategy</h3>
+            <p>Identifying high-margin, low-sales brands for promotional adjustments.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-top">
+            <div class="card-tag">Rankings</div>
+            <h3>Top 10 Performers</h3>
+            <p>Bar charts showing the top 10 vendors and brands by total sales.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-pareto">
+            <div class="card-tag">Pareto</div>
+            <h3>Vendor Contribution (Pareto)</h3>
+            <p>Pareto analysis identifying the vital few vendors contributing to 80% of purchases.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-donut">
+            <div class="card-tag">Breakdown</div>
+            <h3>Vendor Contribution (%)</h3>
+            <p>A donut chart visualizing the purchase contribution of the top vendors.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-bulk">
+            <div class="card-tag">Procurement</div>
+            <h3>Bulk Purchase Impact</h3>
+            <p>Analysis of how order size impacts the unit purchase price.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+        <div class="card" data-modal-target="modal-ci">
+            <div class="card-tag">Statistics</div>
+            <h3>Profit Margin Analysis</h3>
+            <p>A statistical comparison of profit margins between top and low-performing vendors.</p>
+            <div class="card-arrow">View Analysis →</div>
+        </div>
+
+    </main>
+
+    <!-- ─── MODALS ─── -->
+
+    <div id="modal-dist" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Distribution of Numerical Data</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images\distribution_plots.png" alt="Distribution Plots">
+                <h4>Analytic Business Question</h4>
+                <p>What are the fundamental statistical properties of our key business metrics like sales, profit, and stock turnover?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li><strong>Profit Margin:</strong> The histogram shows a strong <strong>left-skew</strong>. This means the vast majority of data points are concentrated at the high end of the profit margin scale.</li>
+                    <li><strong>Stock Turnover:</strong> This chart displays a pronounced <strong>right-skew</strong>, indicating that most products have a low turnover rate, with a long tail of products that turn over very slowly.</li>
+                    <li><strong>Unit Purchase Price:</strong> This metric follows a relatively <strong>normal distribution</strong> (a bell shape), suggesting prices are clustered around a central average with predictable variation.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>The high profitability shown in the skew is positive, but it also means that any transaction with a low profit margin is a significant deviation from the norm and should be investigated.</li>
+                    <li>The slow stock turnover for most items is a major concern. It suggests a risk of overstocking, carrying costs, and product obsolescence. The business should focus on strategies to boost sales for this "long tail."</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-box" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Outlier Detection with Boxplots</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images\boxplot_outliers.png" alt="Boxplots">
+                <h4>Analytic Business Question</h4>
+                <p>Are there any transactions or products performing unusually well or poorly that require special attention?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>The boxplots confirm the findings from the histograms. They provide a clear visual of the data's spread and central tendency.</li>
+                    <li><strong>Significant Outliers:</strong> The plots for 'StockTurnover' and 'SalesToPurchaseRatio' clearly display numerous data points far above the main cluster. These represent exceptionally high-performing products or transactions.</li>
+                    <li><strong>Data Range:</strong> Most metrics show a tight interquartile range (the "box"), confirming that the bulk of the data is consistent.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>These outliers are not errors; they are your star performers. The business must treat them as case studies.</li>
+                    <li><strong>Actionable Intelligence:</strong> A deep-dive analysis should be conducted on these specific outliers. What product was it? Which vendor? What time of year? The answers could unlock a new, highly successful business strategy to apply to other products.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-cat" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Categorical Data Counts</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/categorical_count_plots.png" alt="Categorical Plots">
+                <h4>Analytic Business Question</h4>
+                <p>Who are our most frequent vendors and what are our most common products in terms of transaction volume?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>This analysis counts the number of <em>transactions</em> for each category, not the total sales value.</li>
+                    <li><strong>Top Vendors by Frequency:</strong> 'Haldirams Distributors' and 'Nestle Suppliers' are involved in the highest number of individual transactions, indicating frequent operational contact.</li>
+                    <li><strong>Top Products by Frequency:</strong> 'Noodles 1kg' and 'Biscuits 1kg' appear most often in the transaction logs, suggesting they are staple items.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>This view emphasizes operational dependency. The vendors and products that appear most frequently are central to the day-to-day workflow of the procurement and sales process.</li>
+                    <li>Any inefficiency in handling these frequent items (e.g., ordering delays, stockouts) will have a disproportionately large impact on overall operational efficiency.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-corr" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Correlation Heatmap</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images\correlation_heatmap.png" alt="Correlation Heatmap">
+                <h4>Analytic Business Question</h4>
+                <p>How do different financial and operational metrics influence each other? For example, does increasing sales also increase freight cost?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>The heatmap provides a matrix of correlation coefficients, where 1.0 is a perfect positive correlation and -1.0 is a perfect negative one.</li>
+                    <li><strong>Strong Positive Correlation:</strong> A very strong link (0.96) exists between 'FreightCost' and 'TotalSalesRupees'. This is the most significant finding.</li>
+                    <li><strong>Expected Correlation:</strong> As anticipated, 'TotalSalesQuantity' and 'TotalSalesRupees' are also highly correlated (0.95).</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>The freight cost correlation is a critical strategic finding. It confirms that <strong>logistics are a variable cost, not a fixed one</strong>.</li>
+                    <li>This means that for large sales or low-margin products, a failure to account for escalating freight costs could completely erase the profit on a deal. Pricing models and profitability calculations must include this scaling factor.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-promo" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Brand Promotional Strategy</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/brand_adjustments_plot.png" alt="Brand Adjustments Plot">
+                <h4>Analytic Business Question</h4>
+                <p>Which products are highly profitable but are not selling well, representing untapped potential?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>This scatter plot segments all brands into four strategic quadrants based on sales volume and profit margin.</li>
+                    <li><strong>Target Quadrant:</strong> The red dots highlight the brands located in the desired 'High Profit Margin, Low Sales' quadrant. These are the specific targets identified by the analysis.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>This chart moves beyond simple reporting to provide a direct, actionable list of <strong>"growth opportunity" brands</strong>.</li>
+                    <li><strong>Actionable Intelligence:</strong> The business can now implement targeted strategies for these specific brands, such as:
+                        <ul>
+                            <li>Initiating targeted digital marketing campaigns.</li>
+                            <li>Improving in-store visibility and shelf placement.</li>
+                            <li>Creating promotional bundles with high-selling items.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-top" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Top 10 Performers by Sales</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/top_vendors_and_brands.png" alt="Top Vendors and Brands">
+                <h4>Analytic Business Question</h4>
+                <p>Who are our absolute top-performing vendors and brands by total revenue?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>These bar charts provide a clear, unambiguous ranking of the top 10 entities based on their contribution to total revenue.</li>
+                    <li><strong>Top Vendor:</strong> 'Haldirams Distributors' is the undisputed leader, contributing <strong>13.29 Cr</strong> in sales.</li>
+                    <li><strong>Top Brand:</strong> 'Noodles 1kg' is the single most valuable product, generating <strong>1.96 Cr</strong> in sales.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>This analysis identifies the <strong>pillars of the company's revenue</strong>. These vendors and brands are not just important; they are mission-critical.</li>
+                    <li><strong>Strategic Imperatives:</strong>
+                        <ul>
+                            <li><strong>Vendor Relationship Management:</strong> The relationship with Haldirams and other top vendors must be actively managed at a strategic level.</li>
+                            <li><strong>Supply Chain Security:</strong> The supply chain for top products like Noodles must be robust and resilient to disruption.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-pareto" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Vendor Contribution (Pareto Analysis)</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/pareto_vendor_contribution.png" alt="Pareto Chart">
+                <h4>Analytic Business Question</h4>
+                <p>Are we overly dependent on a small number of vendors for our procurement (The 80/20 Rule)?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>This Pareto chart analyzes supplier concentration. The blue bars represent the purchase percentage of each individual vendor, sorted from largest to smallest.</li>
+                    <li>The red line plots the cumulative percentage. The dashed grey line marks the 80% threshold.</li>
+                    <li>The analysis clearly shows the cumulative line crosses the 80% mark with only the <strong>top three vendors</strong>. The top four account for over 90%.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>The 80/20 rule is not just met; it's exceeded. This indicates a <strong>critical business risk due to high supplier concentration</strong>.</li>
+                    <li><strong>Strategic Vulnerability:</strong> Any disruption from one of the top 3-4 suppliers (e.g., a factory issue, a sharp price increase, or a competitor's exclusive deal) would severely cripple the company's ability to operate.</li>
+                    <li><strong>Recommendation:</strong> A strategic priority must be to <strong>diversify the supplier base</strong> to mitigate this risk, even if it means slightly less favorable terms in the short run.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-donut" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Vendor Purchase Contribution (%)</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/vendor_donut_chart.png" alt="Donut Chart">
+                <h4>Analytic Business Question</h4>
+                <p>What is the exact percentage contribution of our top vendors to our total procurement costs?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>The donut chart provides a simple, powerful visualization of the proportional contribution of each top vendor to total procurement.</li>
+                    <li>It visually confirms the Pareto analysis, showing that the 'Other Vendors' category is a near-invisible sliver.</li>
+                    <li><strong>Key Figure:</strong> The top vendors collectively account for <strong>99.99%</strong> of all procurement costs.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>This chart serves as an effective <strong>communication tool for executives</strong>. While the Pareto chart is more detailed, this donut chart delivers the core message of extreme dependency in an instant.</li>
+                    <li>It immediately conveys the urgency of the supplier concentration issue and can be used to build a business case for investing in supplier diversification.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-bulk" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Impact of Bulk Purchasing on Unit Price</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/bulk_purchase_impact.png" alt="Bulk Purchase Impact">
+                <h4>Analytic Business Question</h4>
+                <p>Does buying in larger quantities actually save us money on the unit price?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>This boxplot directly challenges the common business assumption that buying in bulk leads to volume discounts.</li>
+                    <li><strong>Counter-intuitive Finding:</strong> The data shows that 'Small' orders have the lowest median unit purchase price. 'Medium' orders, surprisingly, have the highest median price.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>The data proves that the company's current procurement reality <strong>does not follow the 'bulk is cheaper' model</strong>.</li>
+                    <li><strong>Actionable Intelligence:</strong>
+                        <ul>
+                            <li>The procurement strategy must be re-evaluated. It may be more cost-effective to place smaller, more frequent orders.</li>
+                            <li>This could have the added benefit of reducing inventory holding costs, storage needs, and the risk of product expiry.</li>
+                            <li>An investigation is needed to understand <em>why</em> this is the case. Is it due to the product mix, shipping costs, or specific vendor agreements?</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-ci" class="modal">
+        <div class="modal-content">
+            <div class="modal-top-bar">
+                <h2>Profit Margin Statistical Comparison</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="images/confidence_interval_comparison.png" alt="Confidence Interval Comparison">
+                <h4>Analytic Business Question</h4>
+                <p>Is there a statistically significant difference in profitability between our best-performing vendors and our worst-performing ones?</p>
+                <h4>Analysis</h4>
+                <ul>
+                    <li>This chart plots the 95% confidence intervals for the mean profit margin of two distinct groups: top-performing vendors and low-performing vendors.</li>
+                    <li>A confidence interval is a range of values that we are 95% certain contains the true mean of the group.</li>
+                    <li><strong>Key Statistical Finding:</strong> The blue and red confidence intervals <strong>do not overlap</strong>. This is a clear visual indicator of a statistically significant difference between the two groups.</li>
+                </ul>
+                <h4>Key Insight</h4>
+                <ul>
+                    <li>Top vendors are not just selling more; they are operating at a <strong>fundamentally more profitable level</strong>. The difference is not due to random chance.</li>
+                    <li><strong>Actionable Intelligence:</strong> The business should treat its top vendors as a 'gold standard' model.
+                        <ul>
+                            <li>Analyze the business practices, product mix, and contract terms of top vendors.</li>
+                            <li>Use these findings to create a 'best practice' framework that can be used to negotiate with and improve the performance of lower-tier vendors.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
